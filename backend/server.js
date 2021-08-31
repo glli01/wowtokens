@@ -19,8 +19,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("build"));
 app.use(cors());
 
-app.get("/*", async (req, res) => {
-  res.redirect("/");
+app.get("/", (req, res) => {
+  console.log("Connected");
+  res.send("Connected");
 });
 
 app.get(`/api/name/:id`, async (req, res) => {
@@ -124,5 +125,9 @@ app.post("/api/item/update", async (req, res) => {
   console.log("POST to /api/item/update");
   try {
   } catch (error) {}
+});
+
+app.get("/*", async (req, res) => {
+  res.redirect("/");
 });
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
