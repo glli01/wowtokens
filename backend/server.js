@@ -21,7 +21,6 @@ app.use(cors());
 
 app.get("/", (req, res) => {
   console.log("Connected");
-  res.send("Connected");
 });
 
 app.get(`/api/name/:id`, async (req, res) => {
