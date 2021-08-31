@@ -19,6 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("build"));
 app.use(cors());
 
+app.get("/*", async (req, res) => {
+  res.redirect("/");
+});
+
 app.get(`/api/name/:id`, async (req, res) => {
   console.log(`GET request to /api/name/${req.params.id}`);
   try {
