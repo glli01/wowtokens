@@ -1,17 +1,6 @@
 import AHTable from "../components/AHTable";
-import WTNavbar from "../components/WTNavbar";
-import { useState } from "react";
-const AHData = () => {
-  const [realm, setRealm] = useState({
-    realmName: "Malygos",
-    connectedRealmID: 104,
-  });
-  return (
-    <div className="main">
-      <WTNavbar realm={realm} setRealm={setRealm}></WTNavbar>
-      <AHTable realm={realm} setRealm={setRealm}></AHTable>
-    </div>
-  );
+const AHData = ({ realm, setRealm }) => {
+  return <AHTable realm={realm} setRealm={setRealm}></AHTable>;
 };
 
 export default AHData;

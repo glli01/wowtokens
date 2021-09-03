@@ -10,7 +10,6 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {
-  translateToGoldSilverCopper,
   findMedian,
   translateToGold,
   translateToSilver,
@@ -42,7 +41,7 @@ const AHTable = ({ realm, setRealm }) => {
   const [ILIP, setILIP] = useState(false);
   const [auctionNum, setAuctionNum] = useState(0);
 
-  const ACCESS_TOKEN = "US6RPVNeUsdX952rQ3Fbz2OKkFrNHyERYb";
+  const ACCESS_TOKEN = "US1QZ6c7nedoFkkXQFpan5lF3Vi74HDvag";
 
   useEffect(() => {
     getAllAuctionHouseData();
@@ -374,7 +373,7 @@ const AHTable = ({ realm, setRealm }) => {
         <>
           <Container
             fluid
-            className="d-flex flex-row justify-content-between w-75 p-3"
+            className="d-flex flex-row justify-content-between w-50 py-3 px-0"
           >
             {startIndex > 0 ? (
               <Button
@@ -415,7 +414,7 @@ const AHTable = ({ realm, setRealm }) => {
                 if (e.key === "Enter") handleSearch();
               }}
             />
-            {endIndex <= [...auctionHouseMap].length ? (
+            {endIndex <= auctionHouseMap.size ? (
               <Button
                 variant="dark"
                 disabled={nextDisabled}
@@ -432,7 +431,6 @@ const AHTable = ({ realm, setRealm }) => {
               <Button
                 disabled
                 variant="dark"
-                disabled={prevDisabled}
                 onClick={() => {
                   setStartIndex(startIndex + increment);
                   setEndIndex(endIndex + increment);
@@ -446,7 +444,7 @@ const AHTable = ({ realm, setRealm }) => {
           </Container>
           <Container
             fluid
-            className="d-flex flex-row justify-content-center mb-3 w-100"
+            className="d-flex flex-row justify-content-center mb-3 w-100 px-0"
           >
             {badges.length > 0 ? (
               <>
@@ -478,39 +476,52 @@ const AHTable = ({ realm, setRealm }) => {
           </Container>
           <Container
             fluid
-            className="d-flex flex-row justify-content-center mb-3 w-100 white-text"
+            className="d-flex flex-row justify-content-center mb-3 px-0 white-text"
           >
             Items {startIndex} - {endIndex} of {auctionHouseMap.size} in{" "}
             {auctionNum} auctions
           </Container>
-          <Container fluid className="d-flex flex-row justify-content-center">
-            <Table striped bordered hover variant="dark" className="w-75">
+          <Container
+            fluid
+            className="d-flex flex-row justify-content-center px-0"
+          >
+            <Table striped bordered hover variant="dark" className="table-w-50">
               <thead>
-                <tr>
-                  <th style={{ width: "25%" }}>Item</th>
+                <tr className="text-end">
+                  <th className="text-start">
+                    {" "}
+                    <span
+                      style={{
+                        marginLeft: "5vh",
+                        marginLeft: "calc(var(--vh, 1vh) * 5);",
+                      }}
+                    >
+                      Item
+                    </span>
+                  </th>
                   <th
-                    style={{ width: "16.66%" }}
+                    style={{ width: "8em" }}
                     className="hover-underline"
                     onClick={sortByPrice}
                   >
                     Low
                   </th>
                   <th
-                    style={{ width: "20%" }}
+                    style={{ width: "8em" }}
                     className="hover-underline"
                     onClick={sortByPrice}
                   >
                     Median
                   </th>
                   <th
-                    style={{ width: "23.333%" }}
+                    style={{ width: "8em" }}
                     className="hover-underline"
                     onClick={sortByPrice}
                   >
                     Average
                   </th>
                   <th
-                    style={{ width: "15%" }}
+                    style={{ width: "5em" }}
                     className="hover-underline"
                     onClick={sortByQuantityAsc}
                   >
@@ -518,17 +529,17 @@ const AHTable = ({ realm, setRealm }) => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="text-end">
                 {[...auctionHouseMap.keys()]
                   .slice(startIndex, endIndex)
                   .map((item) => (
                     <tr key={item}>
                       <td
                         onClick={() => handleModal(item)}
-                        className="hover-underline"
+                        className="hover-underline text-start p-1 px-0"
                       >
-                        <div style={{ minHeight: "3vh" }}>
-                          <span>
+                        <div style={{ minHeight: "33px" }}>
+                          <span className="px-2">
                             <Image
                               fluid
                               src={
@@ -553,29 +564,29 @@ const AHTable = ({ realm, setRealm }) => {
                           )}
                         </div>
                       </td>
-                      <td>
-                        <Container className="d-flex flex-row">
+                      <td className="px-0">
+                        <Container className="d-flex px-0 flex-row justify-content-end">
                           <div
                             className="d-flex flex-row justify-content-end"
-                            style={{ minWidth: "30%" }}
+                            style={{ minWidth: "6em" }}
                           >
                             {translateToGold(findMin(item, auctionHouseMap))}
-                            <Image src={coinGold}></Image>
+                            <Image src={coinGold} className="coin"></Image>
                           </div>
                           <div
                             className="d-flex flex-row justify-content-end"
-                            style={{ minWidth: "20%" }}
+                            style={{ minWidth: "3em" }}
                           >
                             {translateToSilver(findMin(item, auctionHouseMap))}
-                            <Image src={coinSilver}></Image>
+                            <Image src={coinSilver} className="coin"></Image>
                           </div>
                         </Container>
                       </td>
-                      <td>
-                        <Container className="d-flex flex-row p-0">
+                      <td className="px-0">
+                        <Container className="d-flex flex-row px-0 justify-content-end">
                           <div
                             className="d-flex flex-row justify-content-end"
-                            style={{ minWidth: "25%" }}
+                            style={{ minWidth: "6em" }}
                           >
                             {translateToGold(
                               findMedian(
@@ -590,11 +601,11 @@ const AHTable = ({ realm, setRealm }) => {
                                   )
                               )
                             )}
-                            <Image src={coinGold}></Image>
+                            <Image src={coinGold} className="coin"></Image>
                           </div>
                           <div
                             className="d-flex flex-row justify-content-end"
-                            style={{ minWidth: "10%" }}
+                            style={{ minWidth: "2em" }}
                           >
                             {translateToSilver(
                               findMedian(
@@ -610,10 +621,11 @@ const AHTable = ({ realm, setRealm }) => {
                               )
                             )}
                           </div>
-                          <Image src={coinSilver}></Image>
+                          <Image src={coinSilver} className="coin"></Image>
                         </Container>
                       </td>
                       <td
+                        className="px-0"
                         onClick={() => {
                           console.log(
                             JSON.stringify(
@@ -633,21 +645,21 @@ const AHTable = ({ realm, setRealm }) => {
                           );
                         }}
                       >
-                        <Container className="d-flex flex-row p-0">
+                        <Container className="d-flex flex-row p-0 justify-content-end">
                           <div
                             className="d-flex flex-row justify-content-end"
-                            style={{ minWidth: "25%" }}
+                            style={{ minWidth: "6em" }}
                           >
                             {translateToGold(findAvg(item, auctionHouseMap))}
-                            <Image src={coinGold}></Image>
+                            <Image src={coinGold} className="coin"></Image>
                           </div>
                           <div
                             className="d-flex flex-row justify-content-end"
-                            style={{ minWidth: "20%" }}
+                            style={{ minWidth: "2em" }}
                           >
                             {translateToSilver(findAvg(item, auctionHouseMap))}
-                            <Image src={coinSilver}></Image>
                           </div>
+                          <Image src={coinSilver} className="coin"></Image>
                         </Container>
                       </td>
                       <td>{auctionHouseMap.get(item).totalQuantity}</td>
