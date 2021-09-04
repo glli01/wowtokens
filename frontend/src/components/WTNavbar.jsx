@@ -1,8 +1,16 @@
 import React from "react";
-import { Navbar, Container, Nav, NavDropdown, Spinner } from "react-bootstrap";
+import {
+  Navbar,
+  Container,
+  Nav,
+  NavDropdown,
+  Spinner,
+  Image,
+} from "react-bootstrap";
 import { useState } from "react";
 import DismissableAlert from "./DismissableAlert";
 import axios from "axios";
+import wowtoken from "../assets/img/token.png";
 
 const WTNavbar = ({ realm, setRealm }) => {
   const [realmList, setRealmList] = useState([]);
@@ -36,7 +44,15 @@ const WTNavbar = ({ realm, setRealm }) => {
     <>
       <Navbar bg="dark" variant="dark" className="w-100">
         <Container fluid className="w-75">
-          <Navbar.Brand href="#home">Wowtokens</Navbar.Brand>
+          <Navbar.Brand href="#home">
+            {" "}
+            <Container fluid className="d-flex">
+              <Image src={wowtoken} style={{ width: "2rem" }}></Image>
+              <div style={{ display: "inline" }} className="px-1">
+                Wowtokens
+              </div>
+            </Container>
+          </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link>Home</Nav.Link>
             <Nav.Link>Features</Nav.Link>

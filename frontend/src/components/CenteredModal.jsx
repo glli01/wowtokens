@@ -46,7 +46,7 @@ const CenteredModal = (props) => {
         <Container
           fluid
           className="d-flex d-row justify-content-center mt-5"
-          style={{ "max-height": "50vh" }}
+          style={{ maxHeight: "50vh" }}
         >
           <div
             className="custom-scrollbar-css"

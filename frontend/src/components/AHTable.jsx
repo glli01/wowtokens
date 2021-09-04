@@ -79,6 +79,12 @@ const AHTable = ({ realm, setRealm }) => {
       ids: [...auctionHouseMap.keys()],
     });
     console.log(response.data);
+    if (response.data.length >= 1000) {
+      setMessage(
+        `Caution: Your search query may not be specific enough, so the items shown may vary from what is expected.`
+      );
+      setShowError(true);
+    }
     let responseMap = new Map();
     response.data.forEach((entry) => responseMap.set(entry.itemID, 1));
     console.log(responseMap);
@@ -493,7 +499,7 @@ const AHTable = ({ realm, setRealm }) => {
                     <span
                       style={{
                         marginLeft: "5vh",
-                        marginLeft: "calc(var(--vh, 1vh) * 5);",
+                        marginLeft: "calc(var(--vh, 1vh) * 5)",
                       }}
                     >
                       Item
