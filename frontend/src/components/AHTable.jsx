@@ -41,7 +41,7 @@ const AHTable = ({ realm, setRealm }) => {
   const [ILIP, setILIP] = useState(false);
   const [auctionNum, setAuctionNum] = useState(0);
 
-  const ACCESS_TOKEN = "US1QZ6c7nedoFkkXQFpan5lF3Vi74HDvag";
+  const ACCESS_TOKEN = "USJ6h0WjEgWMlMvUSRbxztINPY1E2W8M2j";
 
   useEffect(() => {
     getAllAuctionHouseData();
