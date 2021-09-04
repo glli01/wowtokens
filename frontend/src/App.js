@@ -4,6 +4,7 @@ import AHData from "./screens/AHData";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Calculator from "./screens/Calculator";
 import WTNavbar from "./components/WTNavbar";
+import axios from "axios";
 
 function App() {
   useEffect(() => {

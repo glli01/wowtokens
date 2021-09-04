@@ -18,6 +18,7 @@ import coinGold from "../assets/img/coin-gold.png";
 import coinSilver from "../assets/img/coin-silver.png";
 import DismissableAlert from "./DismissableAlert";
 import CenteredModal from "./CenteredModal";
+
 const AHTable = ({ realm, setRealm }) => {
   const increment = 15;
 
@@ -41,8 +42,6 @@ const AHTable = ({ realm, setRealm }) => {
   const [ILIP, setILIP] = useState(false);
   const [auctionNum, setAuctionNum] = useState(0);
 
-  const ACCESS_TOKEN = "USJ6h0WjEgWMlMvUSRbxztINPY1E2W8M2j";
-
   useEffect(() => {
     getAllAuctionHouseData();
     clearSearches();
@@ -58,7 +57,7 @@ const AHTable = ({ realm, setRealm }) => {
   const getAllAuctionHouseData = async () => {
     try {
       const { data } = await axios.get(
-        `https://us.api.blizzard.com/data/wow/connected-realm/${realm.connectedRealmID}/auctions?namespace=dynamic-us&locale=en_US&access_token=${ACCESS_TOKEN}`
+        `https://us.api.blizzard.com/data/wow/connected-realm/${realm.connectedRealmID}/auctions?namespace=dynamic-us&locale=en_US`
       );
       // console.log(data.auctions);
       setAuctionNum(data.auctions.length);
@@ -326,7 +325,7 @@ const AHTable = ({ realm, setRealm }) => {
         console.log(id);
         if (!id) continue;
         const { data } = await axios.get(
-          `https://us.api.blizzard.com/data/wow/media/item/${id}?namespace=static-us&locale=en_US&access_token=${ACCESS_TOKEN}`
+          `https://us.api.blizzard.com/data/wow/media/item/${id}?namespace=static-us&locale=en_US`
         );
         newMap.set(id, {
           ...names.get(id),

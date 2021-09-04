@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
@@ -7,6 +7,9 @@ import connectDB from "./utils/db.js";
 import Item from "./models/itemModel.js";
 import Names from "./models/namesModel.js";
 import Realm from "./models/realmModel.js";
+import cron from "node-cron";
+import getAccessToken from "./utils/getAccessToken.js";
+import AccessToken from "./models/accessTokenModel.js";
 dotenv.config();
 connectDB();
 
@@ -18,6 +21,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("build"));
 app.use(cors());
+
+(() => {
+  try {
+    getAccessToken();
+  } catch (error) {
+    console.log(`Error: ${error.message}`);
+  }
+})();
+
+cron.schedule("0 0 * * *", async () => {
+  try {
+    getAccessToken();
+  } catch (error) {
+    console.log(`Error: ${error.message}`);
+  }
+});
+
+app.get("/api/accessToken", async (req, res) => {
+  console.log(`GET /api/accessToken`);
+  try {
+    const token = await AccessToken.findOne({});
+    res.json(token);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+  }
+});
 
 app.get(`/api/name/:id`, async (req, res) => {
   console.log(`GET request to /api/name/${req.params.id}`);

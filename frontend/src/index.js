@@ -2,6 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+
+(async () => {
+  const getAccessToken = async () => {
+    try {
+      const { data } = await axios.get("/api/accessToken");
+      console.log(data);
+      return data.access_token;
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+  };
+  const token = await getAccessToken();
+
+  axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+})();
 
 ReactDOM.render(
   <React.StrictMode>
