@@ -7,6 +7,7 @@ import axios from "axios";
 (async () => {
   const getAccessToken = async () => {
     try {
+      console.log("in get accessToken");
       const { data } = await axios.get("/api/accessToken");
       console.log(data);
       return data.access_token;
