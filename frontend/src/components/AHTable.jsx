@@ -51,8 +51,12 @@ const AHTable = ({ realm, setRealm }) => {
   }, [realm]);
 
   useEffect(() => {
-    getNames();
-  }, [endIndex, auctionHouseMap]);
+    getNames(NLIP);
+  }, [endIndex]);
+
+  useEffect(() => {
+    getNames(false);
+  }, [auctionHouseData]);
 
   const getAllAuctionHouseData = async () => {
     try {
@@ -282,11 +286,10 @@ const AHTable = ({ realm, setRealm }) => {
         )
     );
   };
-  const getNames = async () => {
+  const getNames = async (loading) => {
     try {
-      if (NLIP) return;
       // console.log("start: " + startIndex + " end: " + endIndex);
-      // console.log("get names called");
+      if (loading) return;
       for (let i = startIndex; i < endIndex; i++) {
         if (!auctionHouseNames.has([...auctionHouseMap.keys()][i])) break;
         if (i === endIndex - 1)
