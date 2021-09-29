@@ -52,7 +52,7 @@ const AHTable = ({ realm, setRealm }) => {
 
   useEffect(() => {
     getNames(NLIP);
-  }, [endIndex]);
+  }, [endIndex, auctionHouseMap]);
 
   useEffect(() => {
     getNames(false);
